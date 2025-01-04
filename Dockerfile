@@ -22,8 +22,5 @@ VOLUME /var/jenkins_home
 # Switch back to Jenkins user
 USER jenkins
 
-# Set the default working directory
-WORKDIR /var/jenkins_home
-
-# Run Jenkins
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
+# Output the initial admin password to logs
+CMD ["/bin/bash", "-c", "cat /var/jenkins_home/secrets/initialAdminPassword && /usr/local/bin/jenkins.sh"]
