@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: jenkins
+    env: docker
+    dockerfilePath: Dockerfile # Path to your Dockerfile
+    disk:
+      name: jenkins-data       # Name of the persistent disk
+      mountPath: /var/jenkins_home # Mount the disk to Jenkins' home directory
+      sizeGB: 10               # Disk size in GB, adjust as needed
+    plan: standard             # Choose 'standard' or 'starter' based on your needs
+    healthCheckPath: /         # Jenkins default health check path
+    autoDeploy: true           # Automatically deploy when changes are pushed
+    envVars:
+      - key: JENKINS_OPTS      # Optional Jenkins options (customize as needed)
+        value: "--prefix=/jenkins"
